@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isLoggedIn: false,
+  
   user:null,
   error: null,
 
@@ -17,12 +18,12 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.error = null;
     },
-    updateLocation: (state, action) => {
-      console.log('loginSuccess', state);
-      state.isLoggedIn = true;
-      state.selected_location = action.payload;
-      state.error = null;
-    },
+    signInSuccess: (state, action) =>{
+        console.log('signInSuccess', state);
+        state.isLoggedIn = false;
+        state.user = action.payload;
+        state.error = null;
+      },
     
     loginFailure(state, action) {
       console.log('loginFailure', state);

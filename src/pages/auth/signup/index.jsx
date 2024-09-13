@@ -1,7 +1,7 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import {
   Avatar,
   Button,
@@ -14,15 +14,14 @@ import {
   Box,
   Grid,
   Typography,
-
-} from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { makeStyles } from '@mui/styles';
-import users from '../../../_mock/users';
-import { loginFailure, loginSuccess } from '../../../redux/slices/authAction';
-import { useDispatch } from '../../../redux/store';
-import { toast, ToastContainer } from 'react-toastify';
-import backImage from "../../../assets/Images/backgrounds/login-background.jpg"
+} from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { makeStyles } from "@mui/styles";
+import users from "../../../_mock/users";
+import { loginFailure, loginSuccess } from "../../../redux/slices/authAction";
+import { useDispatch } from "../../../redux/store";
+import { toast, ToastContainer } from "react-toastify";
+import backImage from "../../../assets/Images/backgrounds/login-background.jpg";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
@@ -32,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "cover",
     display: "flex",
     alignItems: "center",
-   
+
     justifyContent: "center",
   },
   size: {
@@ -41,20 +40,18 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 30,
-    paddingTop:15
+    paddingTop: 15,
   },
   paper: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-
-  
   },
   avatar: {},
   form: {
-    width: "100%", 
+    width: "100%",
     marginTop: 2,
-    padding:20,
+    padding: 20,
   },
   submit: {
     margin: 120,
@@ -66,7 +63,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="#">
-       To Do APP
+        To Do APP
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -74,38 +71,50 @@ function Copyright() {
   );
 }
 
-const LoginView = () => {
+const SignUp = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const validationSchema = Yup.object({
+    name: Yup.string().required("name is required"),
+    password: Yup.string()
+      .min(8, "Password must be at least 8 characters")
+      .matches(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        "Password must include at least one special character"
+      )
+      .required("Password is required"),
     email: Yup.string()
-    .email("Invalid email address") 
-    .required("Email is required"),
-    password: Yup.string().required('Password is required'),
+      .email("Invalid email address") // Adds email format validation
+      .required("Email is required"),
   });
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      name: "",
+      password: "",
+      email: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       const user = isVerifiedUser(values.email, values.password);
       if (user) {
-        dispatch(loginSuccess({ user: values.email })); // Dispatch loginSuccess with the username
-        console.log('Login Successful');
-        navigate('/dashboard'); // Navigate to the dashboard
+        toast.error("This user already exsist! ");
       } else {
-        dispatch(loginFailure('Invalid username or password'));
-        toast.error('Invalid username or password'); 
+      
+        console.log("Login Successful");
+
+        toast.error("This user already exsist! ");
+        toast.success("Please use mock user to login ");
+        navigate("/login");
       }
     },
   });
 
   const isVerifiedUser = (email, password) => {
-    return users.some(user => user.email === email && user.password === password);
+    return users.some(
+      (user) => user.email === email && user.password === password
+    );
   };
 
   return (
@@ -126,19 +135,36 @@ const LoginView = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign Up
           </Typography>
-          <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={formik.handleSubmit}
+          >
+            <TextField
+              id="name"
+              name="name"
+              label="name"
+              type="name"
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              {...formik.getFieldProps("name")}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && formik.errors.name}
+            />
             <TextField
               id="email"
-              name="Email"
+              name="email"
               label="Email"
               variant="outlined"
               margin="normal"
               required
               fullWidth
               autoFocus
-              {...formik.getFieldProps('email')}
+              {...formik.getFieldProps("email")}
               error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={formik.touched.email && formik.errors.email}
             />
@@ -151,14 +177,11 @@ const LoginView = () => {
               margin="normal"
               required
               fullWidth
-              {...formik.getFieldProps('password')}
+              {...formik.getFieldProps("password")}
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
             <Button
               type="submit"
               fullWidth
@@ -166,12 +189,12 @@ const LoginView = () => {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Sign up
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="/login" variant="body2">
+                  {"Already have an account? Sign In"}
                 </Link>
               </Grid>
             </Grid>
@@ -185,4 +208,4 @@ const LoginView = () => {
   );
 };
 
-export default LoginView;
+export default SignUp;

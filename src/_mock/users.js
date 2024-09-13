@@ -1,16 +1,19 @@
 const users = [
-    {
-      username: 'john_doe',
-      password: 'password123',
-    },
-    {
-      username: 'jane_smith',
-      password: 'abc12345',
-    },
-    {
-      username: 'admin',
-      password: 'adminpass',
-    },
-  ];
-   
-  export default users;
+  {
+    name: "user1",
+    email: "user1@test.com",
+    password: "password123",
+  },
+  {
+    name: "user2",
+    email: "user2@test.com",
+    password: "abc12345",
+  },
+  {
+    name: "admin",
+    email: "admin@test.com",
+    password: "adminpass",
+  },
+];
+
+export default users;
