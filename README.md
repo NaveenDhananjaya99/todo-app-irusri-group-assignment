@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+### Project README ####
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Project Overview
+This project is a sample application designed to demonstrate key aspects of modern software development. The application incorporates atomic architecture for its folder structure and provides mock users with login functionality. This README will guide you through the project setup, structure, and usage.
 
-## Available Scripts
+### Table of Contents
+ # Introduction
+ # Folder Structure
+ # Mock Users
+ # Getting Started
+ # Usage
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Introduction
+This project showcases the use of atomic architecture, which is a design pattern aimed at creating scalable and maintainable applications. By breaking down the application into small, reusable components, atomic architecture facilitates better organization and modularity.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Folder Structure
+The project follows the atomic architecture pattern with the following folder structure:
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+src/
+├── components/
+│   ├── atoms/
+├── pages/
+    ├── Feature/
+        ├── atoms
+├── store/
+    ├── atoms
+├── assets/
+├── redux/
+│   ├── atoms/
+├── hooks/
+│   ├── atoms/
+└── _mocks_/
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Mock Users
+To facilitate login functionality, the project includes a set of mock users. These users can be used to test the login system:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ {
+    name: "user1",
+    email: "user1@test.com",
+    password: "password123",
+  },
+  {
+    name: "user2",
+    email: "user2@test.com",
+    password: "abc12345",
+  },
+  {
+    name: "admin",
+    email: "admin@test.com",
+    password: "adminpass",
+  },
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Usage
+To use the mock users for login, simply input one of the provided credentials in the login form. The application will authenticate the user against the mock user list.
